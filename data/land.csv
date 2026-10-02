@@ -1,0 +1,9 @@
+land_id,land_type,area_sqft,price_lakhs,price_per_sqft,location,street,city,pincode,facing,broker_id,description,latitude,longitude
+LAND001,Residential Plot,1200,72.0,6000,Velachery, Lake View Road,Chennai,600042,East,BRK001,Synthetic  east-facing residential plot in Velachery suitable for a compact independent home.,12.9795,80.2183
+LAND002,Residential Plot,1800,108.0,6000,Adambakkam, Lake Junction,Chennai,600088,North,BRK001,Synthetic  north-facing residential plot in Adambakkam with dimensions suited to a family house.,12.9833,80.2024
+LAND003,Residential Plot,1500,75.0,5000,Pallikaranai, Marsh View Street,Chennai,600100,West,BRK002,Synthetic  west-facing residential plot in Pallikaranai for a low-rise home project.,12.9386,80.213
+LAND004,Villa Plot,2400,132.0,5500,Madipakkam, Garden Extension,Chennai,600091,East,BRK002,Synthetic  east-facing villa plot in Madipakkam with space for a larger home and garden.,12.9624,80.1998
+LAND005,Residential Plot,1000,68.0,6800,Anna Nagar, Tower Road,Chennai,600040,South,BRK003,Synthetic  south-facing residential plot in Anna Nagar intended for a compact urban home.,13.0853,80.2101
+LAND006,Residential Plot,2000,90.0,4500,Tambaram, Station Link Road,Chennai,600045,North-East,BRK004,Synthetic  north-east-facing residential plot in Tambaram with room for a duplex plan.,12.9255,80.1003
+LAND007,Mixed-use Plot,2200,176.0,8000,Perungudi, Tech Corridor,Chennai,600096,East,BRK003,Synthetic  east-facing mixed-use plot in Perungudi near the business corridor; verify permissions before purchase.,12.9609,80.2456
+LAND008,Residential Plot,1600,88.0,5500,Medavakkam, Greenway Avenue,Chennai,600100,West,BRK002,Synthetic  west-facing residential plot in Medavakkam for a family home with parking.,12.9172,80.1929

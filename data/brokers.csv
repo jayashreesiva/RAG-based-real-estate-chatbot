@@ -1,0 +1,5 @@
+broker_id,broker_name,agency_name,phone,email,areas_served,property_types
+BRK001,Demo Broker 01,Chennai Demo Realty,+91-90000-00001,demo.broker01@example.com,Velachery; Taramani; Adambakkam,Apartment; Independent House
+BRK002,Demo Broker 02,South City Demo Homes,+91-90000-00002,demo.broker02@example.com,Pallikaranai; Madipakkam; Medavakkam,Apartment; Villa
+BRK003,Demo Broker 03,Metro Edge Demo Properties,+91-90000-00003,demo.broker03@example.com,Anna Nagar; Perungudi; Sholinganallur,Apartment; Villa
+BRK004,Demo Broker 04,Tambaram Demo Estates,+91-90000-00004,demo.broker04@example.com,Tambaram; Pallikaranai; Madipakkam,Independent House; Villa

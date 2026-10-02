@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="640" viewBox="0 0 960 640" role="img" aria-label="Synthetic demo property image placeholder">
+  <rect width="960" height="640" fill="#e8eef0"/>
+  <rect x="120" y="150" width="720" height="330" rx="12" fill="#b8c9c9"/>
+  <path d="M90 260 480 80l390 180v38H90z" fill="#547477"/>
+  <rect x="210" y="300" width="150" height="180" fill="#f8faf9"/>
+  <rect x="600" y="300" width="150" height="180" fill="#f8faf9"/>
+  <text x="480" y="560" text-anchor="middle" font-family="Arial, sans-serif" font-size="30" fill="#29464a">SYNTHETIC DEMO PLACEHOLDER</text>
+</svg>

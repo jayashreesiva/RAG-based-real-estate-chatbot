@@ -1,0 +1,15 @@
+# Environment variables
+.env
+
+# Virtual Environment
+venv/
+.venv/
+
+# Byte-compiled / cache files
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+
+# Streamlit config / cache
+.streamlit/

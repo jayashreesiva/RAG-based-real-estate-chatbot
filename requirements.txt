@@ -1,0 +1,10 @@
+# Production dependencies for Chennai Real Estate RAG Chatbot
+# Vector Store: FAISS (ChromaDB completely removed)
+streamlit>=1.30.0
+pandas>=2.0.0
+numpy>=1.25.0
+sentence-transformers>=2.2.0
+scikit-learn>=1.7.0
+faiss-cpu>=1.7.4
+google-genai>=0.1.0
+python-dotenv>=1.0.0

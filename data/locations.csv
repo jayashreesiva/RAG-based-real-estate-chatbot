@@ -1,0 +1,11 @@
+location_id,area,city,pincode,latitude,longitude,nearby_areas,description
+LOC001,Velachery,Chennai,600042,12.9792,80.218,Taramani; Adambakkam; Pallikaranai,Synthetic demo coordinates for Velachery; established residential area with access toward Taramani and Adambakkam.
+LOC002,Taramani,Chennai,600113,12.9916,80.2425,Velachery; Perungudi; Adambakkam,Synthetic demo coordinates for Taramani; technology and residential corridor near Velachery and Perungudi.
+LOC003,Adambakkam,Chennai,600088,12.9827,80.2018,Velachery; Madipakkam; Taramani,Synthetic demo coordinates for Adambakkam; connected residential locality near Velachery and Madipakkam.
+LOC004,Pallikaranai,Chennai,600100,12.9377,80.2121,Velachery; Medavakkam; Sholinganallur,Synthetic demo coordinates for Pallikaranai; growing residential area with access to Medavakkam and Sholinganallur.
+LOC005,Madipakkam,Chennai,600091,12.9624,80.1986,Adambakkam; Pallikaranai; Medavakkam,"Synthetic demo coordinates for Madipakkam; residential area linked to Adambakkam, Pallikaranai and Medavakkam."
+LOC006,Anna Nagar,Chennai,600040,13.085,80.2101,Taramani; Perungudi,Synthetic demo coordinates for Anna Nagar; established central-west Chennai residential and retail area.
+LOC007,Tambaram,Chennai,600045,12.9249,80.1,Medavakkam; Pallikaranai,Synthetic demo coordinates for Tambaram; suburban residential hub with rail connectivity.
+LOC008,Perungudi,Chennai,600096,12.96,80.245,Taramani; Sholinganallur; Velachery,Synthetic demo coordinates for Perungudi; business corridor near Taramani and Sholinganallur.
+LOC009,Sholinganallur,Chennai,600119,12.901,80.2279,Perungudi; Pallikaranai; Medavakkam,Synthetic demo coordinates for Sholinganallur; IT corridor with residential development.
+LOC010,Medavakkam,Chennai,600100,12.9172,80.192,Pallikaranai; Madipakkam; Tambaram,Synthetic demo coordinates for Medavakkam; expanding residential area connected to Pallikaranai and Tambaram.

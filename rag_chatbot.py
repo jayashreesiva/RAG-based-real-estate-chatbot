@@ -246,9 +246,9 @@ class RealEstateRAG:
             raise ValueError("GEMINI_API_KEY not found in environment or .env file!")
         self.gemini_client = genai.Client(api_key=api_key) if api_key else None
 
-        # Load embedding model
-        print(f"Loading embedding model ({self.model_name})...")
-        self.embedding_model = SentenceTransformer(self.model_name)
+ # Lazy-load embedding model.
+# The model will be loaded only when the user performs a search.
+        self.embedding_model = None
 
         # Load FAISS index & metadata
         self.load_faiss()
@@ -410,7 +410,18 @@ class RealEstateRAG:
             )
 
         return comparison
+    def get_embedding_model(self):
+        """
+        Load the Sentence Transformer only when it is actually needed.
+        This allows the Streamlit interface to start without waiting
+        for the AI embedding model.
+        """
+        if self.embedding_model is None:
+            print(f"Loading embedding model ({self.model_name})...")
+            self.embedding_model = SentenceTransformer(self.model_name)
 
+        return self.embedding_model
+    
     @staticmethod
     def _resolve_project_path(path):
         path = Path(path)
@@ -600,7 +611,8 @@ class RealEstateRAG:
         exclude_set = {str(e).strip().lower() for e in exclude_ids} if exclude_ids else set()
 
         # 1. FAISS Semantic Search
-        query_emb = self.embedding_model.encode([norm_query], convert_to_numpy=True).astype(np.float32)
+        embedding_model = self.get_embedding_model()
+        query_emb = embedding_model.encode([norm_query], convert_to_numpy=True).astype(np.float32)
         faiss.normalize_L2(query_emb)
 
         # Retrieve a broader pool of candidates from FAISS for filtering

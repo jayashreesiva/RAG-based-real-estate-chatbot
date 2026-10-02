@@ -576,27 +576,8 @@ st.markdown("""
 
 # Session State Initialization
 if "messages" not in st.session_state:
-    st.session_state.messages = [
-        {
-    "role": "assistant",
-    "content": "I found 3 matching properties for your search...",
-    "speech_content": """
-    I found 3 matching properties for your search.
+    st.session_state.messages = []
 
-    Property ID 92.
-    Location Tambaram.
-    3 BHK.
-    Price 85 lakhs.
-    Area 1200 square feet.
-
-    Property ID 145.
-    Location Tambaram.
-    2 BHK.
-    Price 65 lakhs.
-    Area 950 square feet.
-    """
-}
-    ]
 if "conversation_history" not in st.session_state:
     st.session_state.conversation_history = []
 if "last_retrieved_properties" not in st.session_state:
@@ -888,108 +869,70 @@ with send_col:
         width="stretch"
     )
 
-
 # -------------------------------------------------------------
-# Get Submitted Query
+# Process Submitted Query
 # -------------------------------------------------------------
 
-if st.session_state.submitted_query:
+user_input = None
 
+# Text box / Send button
+if st.session_state.get("submitted_query"):
     user_input = st.session_state.submitted_query
-
-    # Consume it immediately.
-    # This prevents the same question from being processed again.
     st.session_state.submitted_query = None
 
-else:
+# Quick search buttons
+elif st.session_state.get("pending_query"):
+    user_input = st.session_state.pending_query
+    st.session_state.pending_query = None
 
-    # Check quick-search buttons
-    pending_query = st.session_state.get("pending_query")
 
-    if pending_query:
-        st.session_state.pending_query = None
-        user_input = pending_query
+# -------------------------------------------------------------
+# Process the user's question
+# -------------------------------------------------------------
 
-    else:
-        user_input = None
+if user_input:
 
-        if user_input:
-           user_input = user_input.strip()
+    user_input = str(user_input).strip()
 
     if user_input:
+
+        # Add user message to visible chat
         st.session_state.messages.append({
             "role": "user",
             "content": user_input,
             "sources": []
         })
 
-        should_property_search = bool(
-            user_input.strip()
-            and (
-                rag_bot.last_retrieved_properties
-                or any(
-                    rag_bot.conversation_context.get(key) is not None
-                    for key in (
-                        "location",
-                        "bhk",
-                        "min_price",
-                        "max_price",
-                        "property_type",
-                        "land_requirement",
-                        "nearby_requirement"
-                    )
-                )
-                or user_input.strip().lower() not in {
-                    "hi",
-                    "hello",
-                    "hey",
-                    "good morning",
-                    "good afternoon",
-                    "good evening",
-                    "thanks",
-                    "thank you",
-                    "how are you"
-                }
-            )
-        )
-
-        if should_property_search:
-            from rag_chatbot import is_property_search_query
-
-            should_property_search = (
-                is_property_search_query(user_input)
-                or rag_bot.last_retrieved_properties
-                or bool(
-                    any(
-                        rag_bot.conversation_context.get(key) is not None
-                        for key in (
-                            "location",
-                            "bhk",
-                            "min_price",
-                            "max_price",
-                            "property_type",
-                            "land_requirement",
-                            "nearby_requirement"
-                        )
-                    )
-                )
-            )
-
         try:
+            # IMPORTANT:
+            # Use the SAME cached RAG bot so that its
+            # conversation_history is preserved.
             answer = rag_bot.ask(user_input)
 
-        except Exception:
+        except Exception as e:
+            print(f"RAG error: {e}")
+
             answer = (
-                "Sorry, I'm having trouble completing that request right now. "
+                "Sorry, I couldn't process that question right now. "
                 "Please try again."
             )
 
-        sources = list(rag_bot.last_retrieved_properties)
+        # Get properties retrieved for this question
+        sources = list(
+            getattr(
+                rag_bot,
+                "last_retrieved_properties",
+                []
+            ) or []
+        )
 
-        # IMPORTANT:
-        # Build voice output using BOTH answer and property data
-        speech_content = build_speech_content(answer, sources)
+        # Create voice-friendly response
+        speech_content = build_speech_content(
+            answer,
+            sources
+        )
 
+        # Add assistant response
         st.session_state.messages.append({
             "role": "assistant",
             "content": answer,
@@ -997,26 +940,43 @@ else:
             "sources": sources
         })
 
+        # Keep Streamlit state synchronized
         st.session_state.last_retrieved_properties = sources
         st.session_state.last_search_query = user_input
+
+        # Keep a copy of the RAG conversation history
         st.session_state.conversation_history = list(
-            rag_bot.conversation_history
+            getattr(
+                rag_bot,
+                "conversation_history",
+                []
+            )
         )
 
-        if user_input.strip().lower().rstrip("?!. ") in {
+        # Clear selected property when starting a reset command
+        reset_commands = {
             "new search",
             "clear conversation",
             "clear chat",
             "clear",
             "reset",
             "reset memory"
-        }:
+        }
+
+        if user_input.lower().rstrip("?!. ") in reset_commands:
+
             st.session_state.selected_property = None
             st.session_state.selected_property_id = None
 
+            # Also clear the RAG memory
+            rag_bot.clear_memory()
+
+        # Rerun only AFTER the complete answer has been saved
         st.rerun()
+ 
         
-# Footer
+# Footer# 
+
 st.markdown("---")
 st.markdown(
     "<p style='text-align: center; color: #94a3b8; font-size: 0.85rem;'>"

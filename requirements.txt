@@ -8,4 +8,4 @@ scikit-learn>=1.7.0
 faiss-cpu>=1.7.4
 google-genai>=0.1.0
 python-dotenv>=1.0.0
-streamlit-mic-recorder
+streamlit==1.57.0

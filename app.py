@@ -5,7 +5,7 @@ import streamlit as st
 import streamlit.components.v1 as components
 import pandas as pd
 from dotenv import load_dotenv
-#from streamlit_mic_recorder import speech_to_text
+from streamlit_mic_recorder import speech_to_text
 from property_details import (
     get_broker,
     get_nearby_facilities_for_property,
@@ -829,7 +829,7 @@ with search_col:
 # -------------------------------------------------------------
 
 with voice_col:
-    voice_query = speech_to_text(
+    voice_query =speech_to_text(
         language="en",
         start_prompt="🎤",
         stop_prompt="⏹️",
@@ -837,6 +837,7 @@ with voice_col:
         use_container_width=True,
         key="real_estate_voice"
     )
+    
 
 
 # -------------------------------------------------------------

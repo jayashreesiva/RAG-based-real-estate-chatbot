@@ -1,5 +1,9 @@
 import os
 import re
+
+os.environ["OMP_NUM_THREADS"] = "1"
+os.environ["TOKENIZERS_PARALLELISM"] = "false"
+
 import sys
 import pickle
 from pathlib import Path
@@ -410,17 +414,17 @@ class RealEstateRAG:
             )
 
         return comparison
+    
+        
     def get_embedding_model(self):
-        """
-        Load the Sentence Transformer only when it is actually needed.
-        This allows the Streamlit interface to start without waiting
-        for the AI embedding model.
-        """
-        if self.embedding_model is None:
-            print(f"Loading embedding model ({self.model_name})...")
-            self.embedding_model = SentenceTransformer(self.model_name)
+     if self.embedding_model is None:
+        print(f"Loading embedding model ({self.model_name})...")
+        self.embedding_model = SentenceTransformer(
+            self.model_name,
+            device="cpu"
+        )
+     return self.embedding_model
 
-        return self.embedding_model
     
     @staticmethod
     def _resolve_project_path(path):
